@@ -199,13 +199,10 @@ $max: max-width;
   @include prefixFlex(justify-content, $justify, webkit ms spec);
 }
 
-{% if settings.enable_wide_layout %}
-  $siteWidth: 1340px;
-  $slideHeight: 486px;
-{% else %}
+
   $siteWidth: 1030px;
   $slideHeight: 368px;
-{% endif %}
+
 
 $gutter: 30px;
 $gridGutter: 30px;
@@ -218,9 +215,7 @@ $section-spacing-small: 35px;
 $small: 480px;
 $medium: 768px;
 $large: 769px;
-{% if settings.enable_wide_layout %}
-$wide: 1250px;
-{% endif %}
+
 
 $viewportIncrement: 1px;
 $postSmall: $small + $viewportIncrement;
@@ -232,34 +227,31 @@ $breakpoints: (
   'small' '(max-width: #{$small})',
   'medium' '(min-width: #{$postSmall}) and (max-width: #{$medium})',
   'medium-down' '(max-width: #{$medium})',
-  {% if settings.enable_wide_layout %}
-  'large' '(min-width: #{$large}) and (max-width: #{$wide})',
-  {% else %}
+  
   'large' '(min-width: #{$large})',
-  {% endif %}
-  'post-large' '(min-width: #{$large})'{% if settings.enable_wide_layout %},
-  'wide' '(min-width: #{$wide})'{% endif %}
+  
+  'post-large' '(min-width: #{$large})'
 );
 $breakpoint-has-widths: ('small', 'medium', 'medium-down', 'large', 'post-large', 'wide');
 $breakpoint-has-push:  ('medium', 'medium-down', 'large', 'post-large', 'wide');
 $breakpoint-has-pull:  ('medium', 'medium-down', 'large', 'post-large', 'wide');
 
 /*================ Color variables ================*/
-$colorPrimary: {{ settings.color_primary }};
-$colorSecondary: {{ settings.color_secondary }};
+$colorPrimary: #0081a3;
+$colorSecondary: #767676;
 
 // Button colors
 $colorBtnPrimary: $colorPrimary;
 $colorBtnPrimaryHover: lighten($colorBtnPrimary, 10%);
 $colorBtnPrimaryActive: darken($colorBtnPrimaryHover, 10%);
-$colorBtnPrimaryText: {{ settings.color_button_primary_text }};
+$colorBtnPrimaryText: #ffffff;
 
 $colorBtnSecondary: $colorSecondary;
 $colorBtnSecondaryHover: lighten($colorBtnSecondary, 10%);
 $colorBtnSecondaryActive: darken($colorBtnSecondaryHover, 10%);
-$colorBtnSecondaryText: {{ settings.color_button_secondary_text }};
+$colorBtnSecondaryText: #ffffff;
 
-$colorBtnTertiary: {{ settings.color_body_bg }};
+$colorBtnTertiary: #ffffff;
 $colorBtnTertiaryHover: $colorPrimary;
 $colorBtnTertiaryActive: darken($colorPrimary, 10%);
 $colorBtnTertiaryText: $colorPrimary;
@@ -269,36 +261,32 @@ $colorLink: $colorPrimary;
 $colorLinkHover: lighten($colorPrimary, 15%);
 
 // Text colors
-$colorTextBody: {{ settings.color_body_text }};
-$colorTopBarText: {{ settings.color_topbar_text }};
+$colorTextBody: #555555;
+$colorTopBarText: #666666;
 
 // Backgrounds
-$colorBody: {{ settings.color_body_bg }};
+$colorBody: #ffffff;
 $colorHeader: transparent;
-$colorTopBar: {{ settings.color_topbar_bg }};
+$colorTopBar: #eeeeee;
 
 // Background images
-{% if settings.bg_custom != blank %}
-$bgImage: '{{ settings.bg_custom | img_url: '1024x' }}';
-{% elsif settings.theme_bg_image %}
-  $bgImage: '{{ 'bg-music.png' | asset_url }}';
-{% else %}
-  $bgImage: false;
-{% endif %}
 
-$bgImageDisplay: {{ settings.bg_image_display }};
-$passwordBgImage: '{{ 'password-page-background.jpg' | asset_url }}';
+  $bgImage: false;
+
+
+$bgImageDisplay: tile;
+$passwordBgImage: '//cdn.shopify.com/s/files/1/2370/9189/t/8/assets/password-page-background.jpg?14456677141400670805';
 
 // Border colors
-$colorBorder: {{ settings.color_borders }};
+$colorBorder: #dddddd;
 
 // Nav and dropdown link background
-$colorNavText: {{ settings.color_header_text }};
+$colorNavText: #666666;
 
 // Site Footer
-$colorFooterBg: {{ settings.color_footer_bg }};
-$colorFooterText: {{ settings.color_footer_text }};
-$colorFooterSocialLink: {{ settings.color_footer_social_link }};
+$colorFooterBg: #eeeeee;
+$colorFooterText: #555555;
+$colorFooterSocialLink: #555555;
 
 // Helper colors
 $disabledGrey: #f6f6f6;
@@ -312,60 +300,34 @@ $successGreenBg: #ecfef0;
 $passwordPageUseBgImage: true;
 
 /*================ Typography variables ================*/
-{% if settings.type_base_family contains 'Google' %}
-  {% assign type_base_parts = settings.type_base_family | split: '_' %}
-  {% assign type_base_name = type_base_parts[1] %}
-  {% capture base_family %}"{{ type_base_name | split: ':' | first | replace: '+', ' ' }}"{% if type_base_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-{% else %}
-  {% assign base_family = settings.type_base_family %}
-{% endif %}
 
-{% if settings.type_header_family contains 'Google' %}
-  {% assign type_header_parts = settings.type_header_family | split: '_' %}
-  {% assign type_header_name = type_header_parts[1] %}
-  {% capture header_family %}"{{ type_header_name | split: ':' | first | replace: '+', ' ' }}"{% if type_header_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-  {% assign header_weight = type_header_parts[2] %}
-{% else %}
-  {% assign header_family = settings.type_header_family %}
-  {% assign header_weight = 700 %}
-{% endif %}
 
-{% if settings.type_accent_family contains 'Google' %}
-  {% assign type_accent_parts = settings.type_accent_family | split: '_' %}
-  {% assign type_accent_name = type_accent_parts[1] %}
-  {% capture accent_family %}"{{ type_accent_name | split: ':' | first | replace: '+', ' ' }}"{% if type_accent_parts.last == 'serif' %}, serif {% else %}, "HelveticaNeue", "Helvetica Neue", sans-serif{% endif %}{% endcapture %}
-  {% assign accent_weight = type_accent_parts[2] %}
-{% else %}
-  {% assign accent_family = settings.type_accent_family %}
-  {% assign accent_weight = 400 %}
-{% endif %}
+
+
+
 
 // Body Font
-$bodyFontStack: {{ base_family }};
-$baseFontSize: {{ settings.type_base_size }};
+$bodyFontStack: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$baseFontSize: 16px;
 
 // Header Font
-$headerFontStack: {{ header_family }};
-$headerFontWeight: {{ header_weight }};
-$headerBaseFontSize: {{ settings.type_header_size }};
+$headerFontStack: "Arvo", serif ;
+$headerFontWeight: 400;
+$headerBaseFontSize: 32px;
 
 // Navigation and buttons
-$accentFontStack: {{ accent_family }};
-$accentFontWeight: {{ accent_weight }};
-$accentFontSize: {{ settings.type_accent_size }};
+$accentFontStack: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$accentFontWeight: 400;
+$accentFontSize: 16px;
 
 // Header type settings
-{% if settings.type_accent_spacing %}
-  $typeAccentSpacing: true;
-{% else %}
-  $typeAccentSpacing: false;
-{% endif %}
 
-{% if settings.type_accent_transform %}
-  $typeAccentTransform: true;
-{% else %}
+  $typeAccentSpacing: false;
+
+
+
   $typeAccentTransform: false;
-{% endif %}
+
 
 $colorBlankstate: rgba($colorTextBody, 0.35);
 $colorBlankstateBorder: rgba($colorTextBody, 0.15);
