@@ -45,18 +45,16 @@
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
 
   {% if section.settings.show_announcement %}
-    <div class="header-announcement">
-      <div class="wrapper">
-        <strong>
-	        {% if section.settings.announcement_link != blank %}
-    	      <a href="{{ section.settings.announcement_link }}">
-        	{% endif %}
-	          {{ section.settings.header_text | escape }}
-    	    {% if section.settings.announcement_link != blank %}
-        	  </a>
-	        {% endif %}
-        </strong>
-      </div>
+    <div class="Header-announcement">
+      <strong>
+        {% if section.settings.announcement_link != blank %}
+          <a href="{{ section.settings.announcement_link }}">
+        {% endif %}
+          {{ section.settings.header_text | escape }}
+        {% if section.settings.announcement_link != blank %}
+          </a>
+        {% endif %}
+      </strong>
     </div>
   {% endif %}
   <div class="header-bar">

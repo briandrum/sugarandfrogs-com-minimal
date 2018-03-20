@@ -906,34 +906,30 @@ h6 {
 
 
 /*================ Module-specific styles ================*/
-.header-announcement {
-  @include clearfix();
-  font-family: $accentFontStack;
-  font-size: em(14px);
+.Header-announcement {
+  align-items: center;
+  background-color: #222;
+  color: #eee;
+  display: flex;
+  font-family: "Avenir Next", sans-serif;
+  font-size: 12px;
   -webkit-font-smoothing: antialiased;
-  font-weight: 400;
-  background-color: $colorPrimary;
-  color: $colorBtnPrimaryText;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  text-align: center;
+  font-weight: 600;
+  height: 56px;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 
-  @include at-query($min, $large) {
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
+.Header-bar {
+  align-items: center;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+}
 
-  a,
-  button {
-    color: $colorTopBarText;
-
-    &:hover,
-    &:active,
-    &:focus {
-      outline-color: $colorTopBarText;
-    }
-  }
-
+.Header-account {
+  margin-left: auto;
 }
 
 .header-bar {
