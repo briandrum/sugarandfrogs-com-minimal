@@ -243,9 +243,9 @@
       "title": "Cart"
     },
     "customer": {
-      "account": "My Account",
-      "log_out": "Log out",
-      "log_in": "Log in",
+      "account": "My account",
+      "log_out": "Sign out",
+      "log_in": "Sign in",
       "create_account": "Create account",
       "or": "or"
     },
